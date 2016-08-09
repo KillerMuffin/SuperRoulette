@@ -4,6 +4,7 @@
 using namespace std;
 
 class Pixel{
+public:
 	char content;
 	int color;
 
