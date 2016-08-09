@@ -1,0 +1,11 @@
+Debug/SuperRoulette.exe
+SuperRoulette/Debug/
+SuperRoulette/SuperRoulette.vcxproj
+SuperRoulette/SuperRoulette.vcxproj.filters
+SuperRoulette.opensdf
+SuperRoulette.sdf
+SuperRoulette.sln
+SuperRoulette.v11.suo
+Debug/
+*.ipch
+SuperRoulette/ReadMe.txt
