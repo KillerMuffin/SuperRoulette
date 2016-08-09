@@ -12,6 +12,32 @@ Roulette::Roulette(Player p){
 void Roulette::construct(){
 	Utils::seed_random();
 	render = Render("inside.txt");
+
+	int redPos [] = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
+
+	for(int i = 0; i < 18; i++){
+		//Calculate the y position within the board
+		int rawY = 2;
+		if((redPos[i] % 3) == 0){
+			rawY = 0;
+		}else if(((redPos[i] + 1) % 3) == 0){
+			rawY = 1;
+		}
+		int rawX = ((redPos[i] + rawY) / 3)-1;
+
+		//Calculate the pixel position
+		int y = (rawY*2)+2;
+		int x = (rawX*6)+5;
+
+		//Set those pixel to be red
+		for(int j = x-2; j < x+2; j++){
+			Pixel * p = render.get(j,y);
+			p->color = 12;
+		}
+	}
+
+	render.saveState();
+	Utils::cls();
 }
 
 void Roulette::play(){
