@@ -16,8 +16,9 @@ public:
 	vector<Pixel> screen;
 	int width, height;
 
-	const int WHITE = 15;
+	const static int WHITE = 7;
 
+	Render();
 	Render(int,int);
 	Render(string);
 
