@@ -1,18 +1,24 @@
 #include "stdafx.h"
 #include "Roulette.h"
 
+//New roulette game
 Roulette::Roulette(){
 	construct();
 }
+//New roulette game with loaded player
 Roulette::Roulette(Player p){
 	construct();
 	this->p = p;
 }
 
+//Constructor
 void Roulette::construct(){
+	//Seed random
 	Utils::seed_random();
+	//Load the inside board into the render
 	render = Render("inside.txt");
 
+	//List of all red chips
 	int redPos [] = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
 
 	for(int i = 0; i < 18; i++){
@@ -36,51 +42,70 @@ void Roulette::construct(){
 		}
 	}
 
+	//Save the current state
 	render.saveState();
 	Utils::cls();
 }
 
 void Roulette::play(){
+	//Print the intro screen
 	printTitle();
 	Utils::paul();
 
 	bool playing = true;
 
-	startLoop:
+startLoop:
+	//Main game loop
 	while(playing){
+		//Create a new bet
 		newBet();
+		//Show main menu
 		mainMenu();
 
 		bool betting = true;
+		//While betting
 		while(betting){
+			//Bet menu
 			int selection = Utils::menu("continue_bet.menu");
 			switch(selection){
 			case 1:
+				//Place bet
 				makeBet();
 				break;
 			case 2:
+				//Finish bet
 				betting = false;
 				break;
 			case 3:
+				//Cancel bet
 				goto startLoop;
 			}
 		}
 
+		//Show bet results
 		printWinnings();
 
+		//Reset screen
 		Utils::paul();
 	}
 
 }
 
+//Make new bet
 void Roulette::newBet(){
+	//Clear the bets
 	winBets.clear();
+	//Reset winnings
 	winnings = 0;
+	//Set the money to the players money
 	money = p.money;
+	//Reset the board frame
 	render.loadState(0);
+	//Set the winning number
 	winNum = Utils::random(1,36);
 }
 
+//Make a new bet
 void Roulette::makeBet(){
 	int selection = Utils::menu("bet_selection.menu");
 
@@ -94,6 +119,7 @@ void Roulette::makeBet(){
 	}
 }
 
+//Process outside bet
 void Roulette::makeOutsideBet(){
 	int selection = Utils::menu("outside_bet.menu");
 
@@ -228,20 +254,26 @@ void Roulette::makeOutsideBet(){
 	}
 }
 
+//Process inside bet
 void Roulette::makeInsideBet(){
 	Utils::cls();
+	//Print the board
 	printInside();
 	
+	//Get the position entered
 	cout << "Chip position:" << endl;
 	string pos;
 	cin >> pos;
 
+	//Convert to a coordinate
 	Coord c = Utils::strToCoord(pos);
 
+	//Place a chip in the frame at the coordinates
 	Pixel * p = render.get(coordToScreenCoord(c));
 	p->content = 'o';
 	p->color = 10;
 	
+	//Handle bet
 	//Check to see if single num
 	if(((c.x-1) % 2) == 0 && ((c.y-1) % 2) == 0){
 		const int singleOdds = 35;
@@ -370,6 +402,7 @@ void Roulette::makeInsideBet(){
 	}
 }
 
+//Do the main menu
 void Roulette::mainMenu(){
 	bool running = true;
 
@@ -378,36 +411,46 @@ void Roulette::mainMenu(){
 
 		switch(selection){
 		case 1:
+			//Make a bet
 			return;
 		case 2:
+			//Print the highscore
 			printHighscore();
 			break;
 		case 3:
+			//Exit
 			exit(0);
 		case 4:
+			//Restart
 			//TODO
 			return;
 		}
 	}
 }
 
+//Print the results of the bets
 void Roulette::printWinnings(){
 	cout << "Winning number: " << winNum << endl;
 
+	//Print wins/losses
 	if(money > p.money){
 		cout << "You won $" << (winnings) << "!" << endl;
 	}else{
 		cout << "You lost $" << (p.money - (money + winnings)) << "!" << endl;
 	}
+
+	//Print the winning bets
 	cout << "Winning Bets: " << endl;
 	for(int i = 0; i < winBets.size(); i++){
 		Bet b = winBets[i];
 		cout << " - " << b.name << " for $" << b.amount << " with " << b.odds << ":1 odds" << endl;
 	}
 
+	//Set player money
 	p.money = money + winnings;
 }
 
+//Print the title
 void Roulette::printTitle(){
 	string input;
 	
@@ -420,14 +463,17 @@ void Roulette::printTitle(){
 	file.close();
 }
 
+//Render the board
 void Roulette::printInside(){
 	render.render();
 }
 
+//Print the highscores
 void Roulette::printHighscore(){
 
 }
 
+//Get the bet amount
 int Roulette::getBetAmount(){
 	cout << "Enter a bet amount ($" << money << " left): " << endl;
 	cout << "$";
@@ -435,6 +481,7 @@ int Roulette::getBetAmount(){
 	int amount;
 	cin >> amount;
 
+	//If amount is more than the players balance, use rest of players balance
 	if(amount > money){
 		amount = money;
 	}
@@ -443,6 +490,7 @@ int Roulette::getBetAmount(){
 	return amount;
 }
 
+//Coord to num
 int Roulette::numAtCoord(Coord c){
 	if((c.y % 2) == 0 || (c.x % 2) == 0 || c.x < 0 || c.x > 25 || c.y < 0 || c.y > 7){
 		return -1;
@@ -453,6 +501,7 @@ int Roulette::numAtCoord(Coord c){
 
 	return (3 * c.x) - c.y;
 }
+//Num to coord
 Coord Roulette::numToCoord(int num){
 	//Calculate the y position within the board
 	int rawY = 2;
@@ -465,10 +514,12 @@ Coord Roulette::numToCoord(int num){
 
 	return Coord(rawX, rawY);
 }
+//Inside coord to screen coord
 Coord Roulette::coordToScreenCoord(Coord c){
 	return Coord((c.x * 3) + 2, c.y+1);
 }
 
+//Check if number is red
 bool Roulette::onRed(int num){
 	return (
 		num == 1 ||

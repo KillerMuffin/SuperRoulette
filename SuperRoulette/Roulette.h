@@ -14,16 +14,22 @@ using namespace std;
 
 class Roulette{
 private:
+	//Current bet winnings
 	int winnings;
+	//Money left
 	int money;
+	//Winning number
 	int winNum;
 
+	//Winning bets
 	vector<Bet> winBets;
 
+	//Inside board
 	Render render;
 public:
 	Player p;
 
+	//Constructors
 	Roulette();
 	Roulette(Player);
 

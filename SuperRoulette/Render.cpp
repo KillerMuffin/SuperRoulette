@@ -3,6 +3,7 @@
 
 Render::Render(){}
 
+//Create an empty frame of width and height
 Render::Render(int width, int height){
 	this->width = width;
 	this->height = height;
@@ -10,6 +11,7 @@ Render::Render(int width, int height){
 	screen.reserve(width * height);
 }
 
+//Load the frame from a file
 Render::Render(string path){
 	width = -1;
 	height = 0;
@@ -22,6 +24,8 @@ Render::Render(string path){
 		//Set the screen width
 		if(width == -1){
 			width = input.size();
+
+		//If the screen size is not uniform, stop
 		}else if(input.size() != width){
 			return;
 		}
@@ -31,6 +35,7 @@ Render::Render(string path){
 			screen.push_back(Pixel(input.at(i), WHITE));
 		}
 
+		//Increase height
 		height++;
 	}
 	file.close();
@@ -41,7 +46,7 @@ int Render::saveState(){
 	savedStates.push_back(screen);
 	return savedStates.size() - 1;
 }
-//Load the saved screen state
+//Load a saved screen state
 void Render::loadState(int index){
 	screen = savedStates[index];
 }
