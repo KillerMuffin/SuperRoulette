@@ -77,7 +77,7 @@ void Roulette::newBet(){
 	winBets.clear();
 	winnings = 0;
 	money = p.money;
-	render.loadState();
+	render.loadState(0);
 	winNum = Utils::random(1,36);
 }
 

@@ -12,7 +12,7 @@ using namespace std;
 
 class Render{
 public:
-	vector<Pixel> savedState;
+	vector<vector<Pixel>> savedStates;
 	vector<Pixel> screen;
 	int width, height;
 
@@ -22,8 +22,8 @@ public:
 	Render(int,int);
 	Render(string);
 
-	void saveState();
-	void loadState();
+	int saveState();
+	void loadState(int);
 
 	Pixel * get(int,int);
 	Pixel * get(Coord);

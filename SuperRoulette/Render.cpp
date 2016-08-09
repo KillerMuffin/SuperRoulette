@@ -8,7 +8,6 @@ Render::Render(int width, int height){
 	this->height = height;
 
 	screen.reserve(width * height);
-	savedState.reserve(width * height);
 }
 
 Render::Render(string path){
@@ -34,18 +33,17 @@ Render::Render(string path){
 
 		height++;
 	}
-
-	savedState.reserve(width * height);
 	file.close();
 }
 
 //Save the current screen state
-void Render::saveState(){
-	savedState = screen;
+int Render::saveState(){
+	savedStates.push_back(screen);
+	return savedStates.size() - 1;
 }
 //Load the saved screen state
-void Render::loadState(){
-	screen = savedState;
+void Render::loadState(int index){
+	screen = savedStates[index];
 }
 
 //Get pixel at x,y
