@@ -61,9 +61,6 @@ public:
 			c.x = coord.at(aPos) - 65;
 		}
 
-		cout << "x: " << c.x << ", y: " << c.y << endl;
-		pau();
-
 		return c;
 	}
 
