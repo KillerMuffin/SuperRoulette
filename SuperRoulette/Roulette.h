@@ -14,7 +14,8 @@ using namespace std;
 
 class Roulette{
 private:
-	int moneyLeft;
+	int winnings;
+	int money;
 	int winNum;
 
 	vector<Bet> winBets;
@@ -32,6 +33,9 @@ public:
 	int getBetAmount();
 
 	int numAtCoord(Coord);
+	Coord numToCoord(int);
+	Coord coordToScreenCoord(Coord);
+
 	bool onRed(int);
 
 	void makeBet();
