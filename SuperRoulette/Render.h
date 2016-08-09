@@ -5,6 +5,8 @@
 #include <string>
 #include "Coord.h"
 #include <iostream>
+#include <Windows.h>
+#include <fstream>
 
 using namespace std;
 
@@ -13,6 +15,8 @@ public:
 	vector<Pixel> savedState;
 	vector<Pixel> screen;
 	int width, height;
+
+	const int WHITE = 15;
 
 	Render(int,int);
 	Render(string);
@@ -32,4 +36,6 @@ public:
 private:
 	int xyToPos(Coord);
 	Coord posToXy(int);
+
+	void color(int c);
 };

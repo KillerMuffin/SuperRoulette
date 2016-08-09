@@ -10,7 +10,31 @@ Render::Render(int width, int height){
 }
 
 Render::Render(string path){
+	width = -1;
+	height = 0;
 
+	string input;
+	
+	ifstream file(path);
+
+	while(getline(file, input)){
+		//Set the screen width
+		if(width == -1){
+			width = input.size();
+		}else if(input.size() != width){
+			return;
+		}
+
+		//Add the line to screen
+		for(int i = 0; i < input.size(); i++){
+			screen.push_back(Pixel(input.at(i), WHITE));
+		}
+
+		height++;
+	}
+
+	savedState.reserve(width * height);
+	file.close();
 }
 
 //Save the current screen state
@@ -46,7 +70,23 @@ void Render::set(int pos, Pixel p){
 
 //Render the buffer
 void Render::render(){
-	//TODO
+	int currentColor = -1;
+	for(int y = 0; y < height; y++){
+		for(int x = 0; x < width; x++){
+			Pixel * p = get(x,y);
+
+			//Set the pixel color
+			if(p->color != currentColor){
+				color(p->color);
+				currentColor = p->color;
+			}
+
+			cout << p->content;
+		}
+		cout << endl;
+	}
+
+	color(WHITE);
 }
 
 //Convert between x,y and pos
@@ -55,4 +95,11 @@ int Render::xyToPos(Coord c){
 }
 Coord Render::posToXy(int pos){
 	return Coord(pos/width, pos%width);
+}
+
+//Set the color of the console
+void Render::color(int c){
+	HANDLE hConsole;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, c);
 }
