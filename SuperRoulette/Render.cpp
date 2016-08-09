@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Render.h"
 
+Render::Render(){}
+
 Render::Render(int width, int height){
 	this->width = width;
 	this->height = height;
