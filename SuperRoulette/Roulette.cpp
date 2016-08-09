@@ -439,11 +439,14 @@ void Roulette::printWinnings(){
 		cout << "You lost $" << (p.money - (money + winnings)) << "!" << endl;
 	}
 
-	//Print the winning bets
-	cout << "Winning Bets: " << endl;
-	for(int i = 0; i < winBets.size(); i++){
-		Bet b = winBets[i];
-		cout << " - " << b.name << " for $" << b.amount << " with " << b.odds << ":1 odds" << endl;
+	//If player won something
+	if(winBets.size() > 0){
+		//Print the winning bets
+		cout << "Winning Bets: " << endl;
+		for(int i = 0; i < winBets.size(); i++){
+			Bet b = winBets[i];
+			cout << " - " << b.name << " for $" << b.amount << " with " << b.odds << ":1 odds" << endl;
+		}
 	}
 
 	//Set player money
