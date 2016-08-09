@@ -10,8 +10,8 @@ using namespace std;
 
 class Render{
 public:
-	vector<char> savedState;
-	vector<char> screen;
+	vector<Pixel> savedState;
+	vector<Pixel> screen;
 	int width, height;
 
 	Render(int,int);
@@ -20,16 +20,16 @@ public:
 	void saveState();
 	void loadState();
 
-	Pixel get(int,int);
-	Pixel get(Coord);
-	Pixel get(int);
+	Pixel * get(int,int);
+	Pixel * get(Coord);
+	Pixel * get(int);
 
 	void set(int,int,Pixel);
 	void set(Coord,Pixel);
-	void set(int);
+	void set(int,Pixel);
 
-	void render(bool);
+	void render();
 private:
-	int xyToPos(int,int);
+	int xyToPos(Coord);
 	Coord posToXy(int);
 };
