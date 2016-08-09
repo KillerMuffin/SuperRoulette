@@ -2,11 +2,16 @@
 #include "Roulette.h"
 
 Roulette::Roulette(){
-	Utils::seed_random();
+	construct();
 }
 Roulette::Roulette(Player p){
-	Utils::seed_random();
+	construct();
 	this->p = p;
+}
+
+void Roulette::construct(){
+	Utils::seed_random();
+	render = Render("inside.txt");
 }
 
 void Roulette::play(){
@@ -385,15 +390,7 @@ void Roulette::printTitle(){
 }
 
 void Roulette::printInside(){
-	string input;
-	
-	ifstream file("inside.txt");
-
-	while(getline(file, input)){
-		cout << input << endl;
-	}
-
-	file.close();
+	render.render();
 }
 
 void Roulette::printHighscore(){

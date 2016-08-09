@@ -4,6 +4,7 @@
 #include "Bet.h"
 #include "Utils.cpp"
 #include "Coord.h"
+#include "Render.h"
 
 #include <vector>
 #include <iostream>
@@ -17,6 +18,8 @@ private:
 	int winNum;
 
 	vector<Bet> winBets;
+
+	Render render;
 public:
 	Player p;
 
@@ -40,4 +43,7 @@ public:
 	void printHighscore();
 	void printInside();
 	void printTitle();
+
+private:
+	void construct();
 };
