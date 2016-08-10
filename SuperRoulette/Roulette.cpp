@@ -424,7 +424,12 @@ void Roulette::mainMenu(){
 			//Restart
 			p = Player();
 			break;
+		case 5:
+			//Save
+			p.save("profile");
+			break;
 		}
+
 	}
 }
 

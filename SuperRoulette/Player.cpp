@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Player.h"
 
+Player::Player(string name){
+	
+}
+
 Player::Player(){
 	//Set the default values
 	highestWin = betCount = wonCount = 0;
@@ -13,4 +17,15 @@ Player::Player(int money, int highestWin, int betCount, int wonCount){
 	this->highestWin = highestWin;
 	this->betCount = betCount;
 	this->wonCount = wonCount;
+}
+
+void Player::save(string name){
+	ofstream out(name + ".player");
+	
+	out << money << endl;
+	out << highestWin << endl;
+	out << betCount << endl;
+	out << wonCount << endl;
+
+	out.close();
 }

@@ -1,5 +1,7 @@
 #pragma once;
 #include "stdafx.h"
+#include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -11,5 +13,8 @@ public:
 	int wonCount;
 
 	Player();
+	Player(string);
 	Player(int, int, int, int);
+
+	void save(string);
 };
