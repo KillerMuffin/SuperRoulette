@@ -448,7 +448,7 @@ void Roulette::printWinnings(){
 	cout << "Winning number: " << winNum << endl;
 
 	//Print wins/losses
-	if(money > p.money){
+	if((money + winnings) > p.money){
 		cout << "You won $" << (winnings) << "!" << endl;
 	}else{
 		cout << "You lost $" << (p.money - (money + winnings)) << "!" << endl;
