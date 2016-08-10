@@ -114,6 +114,7 @@ void Roulette::newBet(){
 //Make a new bet
 void Roulette::makeBet(){
 	int selection = Utils::menu("bet_selection.menu");
+	p.betCount++;
 
 	switch(selection){
 	case 1:
@@ -455,11 +456,18 @@ void Roulette::printWinnings(){
 
 	//If player won something
 	if(winBets.size() > 0){
+		p.wonCount+=winBets.size();
+
 		//Print the winning bets
 		cout << "Winning Bets: " << endl;
 		for(int i = 0; i < winBets.size(); i++){
 			Bet b = winBets[i];
 			cout << " - " << b.name << " for $" << b.amount << " with " << b.odds << ":1 odds" << endl;
+
+			//Set highest win, etc
+			if(b.amount > p.highestWin){
+				p.highestWin = b.amount;
+			}
 		}
 	}
 
@@ -487,7 +495,13 @@ void Roulette::printInside(){
 
 //Print the highscores
 void Roulette::printHighscore(){
+	Utils::cls();
 
+	cout << "Total Bets: " << p.betCount << endl;
+	cout << "Total Won: " << p.wonCount << endl;
+	cout << "Highest Win: $" << p.highestWin << endl;
+
+	Utils::paul();
 }
 
 //Get the bet amount
