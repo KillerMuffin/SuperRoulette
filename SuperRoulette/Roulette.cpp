@@ -422,8 +422,8 @@ void Roulette::mainMenu(){
 			exit(0);
 		case 4:
 			//Restart
-			//TODO
-			return;
+			p = Player();
+			break;
 		}
 	}
 }
