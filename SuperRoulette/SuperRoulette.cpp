@@ -8,7 +8,9 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	Roulette r = Roulette();
+	Player p("profile");
+
+	Roulette r = Roulette(p);
 	r.play();
 
 	return 0;

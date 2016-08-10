@@ -2,7 +2,17 @@
 #include "Player.h"
 
 Player::Player(string name){
-	
+	//Set the default values
+	highestWin = betCount = wonCount = 0;
+	money = 500;
+
+	ifstream in(name + ".player");
+	if(in.is_open()){
+		in >> money;
+		in >> highestWin;
+		in >> betCount;
+		in >> wonCount;
+	}
 }
 
 Player::Player(){
