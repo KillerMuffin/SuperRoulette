@@ -66,7 +66,13 @@ startLoop:
 		//While betting
 		while(betting){
 			//Bet menu
-			int selection = Utils::menu("continue_bet.menu");
+			Utils::cls();
+			cout << "Current balance: $" << money << endl << endl;
+			int selection = Utils::menu("continue_bet.menu", false);
+			Utils::cls();
+			
+
+			//Process selection
 			switch(selection){
 			case 1:
 				//Place bet
@@ -407,7 +413,10 @@ void Roulette::mainMenu(){
 	bool running = true;
 
 	while(running){
-		int selection = Utils::menu("main_selection.menu");
+		Utils::cls();
+		cout << "Current balance: $" << p.money << endl << endl;
+		int selection = Utils::menu("main_selection.menu", false);
+		Utils::cls();
 
 		switch(selection){
 		case 1:
