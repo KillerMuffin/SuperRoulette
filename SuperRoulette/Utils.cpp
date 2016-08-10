@@ -80,7 +80,13 @@ public:
 
 	//Load and display a menu
 	static int menu(string menu){
-		cls();
+		return Utils::menu(menu, true);
+	}
+
+	static int menu(string menu, bool clear){
+		if(clear){
+			cls();
+		}
 
 		//Load the menu
 		string input;
@@ -99,7 +105,9 @@ public:
 		int index = 0;
 		cin >> index;
 
-		cls();
+		if(clear){
+			cls();
+		}
 		return index;
 	}
 
