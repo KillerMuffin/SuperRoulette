@@ -79,10 +79,16 @@ startLoop:
 				makeBet();
 				break;
 			case 2:
+				//View board
+				Utils::cls();
+				printInside();
+				Utils::paul();
+				break;
+			case 3:
 				//Finish bet
 				betting = false;
 				break;
-			case 3:
+			case 4:
 				//Cancel bet
 				goto startLoop;
 			}
