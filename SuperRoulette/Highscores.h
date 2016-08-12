@@ -9,6 +9,7 @@ using namespace std;
 class Highscores{
 public:
 	list<Highscore> highscores;
+	string file;
 
 	Highscores();
 	Highscores(string);
