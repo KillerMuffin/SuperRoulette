@@ -8,4 +8,5 @@
 |_______/ |__/  |__/ \______/  \______/ |__/ \_______/   \___/   \___/   \_______/
                                                                                   
                                                                                   
-                                                                                  
+Roulette game created by Ben McLean for an IT assignment. It implements all the bets
+from the proper game, saving, and highscores.
