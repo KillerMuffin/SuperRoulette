@@ -4,7 +4,15 @@
 Highscores::Highscores(){}
 
 Highscores::Highscores(string file){
+	ifstream in(file);
 
+	string input;
+	while(getline(in, input)){
+		vector<string> h = Utils::split(input, ',');
+		highscores.push_back(Highscore(h[0], stoi(h[1])));
+	}
+
+	in.close();
 }
 
 vector<Highscore *> Highscores::get(int number){
@@ -36,4 +44,6 @@ void Highscores::save(){
 	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
 		out << (*it).bet << "," << (*it).won << endl;
 	}
+
+	out.close();
 }
