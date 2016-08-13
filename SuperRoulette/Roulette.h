@@ -27,6 +27,9 @@ private:
 
 	//Inside board
 	Render render;
+
+	//List of red numbers
+	vector<int> red;
 public:
 	Player p;
 	Highscores h;

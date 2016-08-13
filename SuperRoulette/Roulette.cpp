@@ -20,17 +20,33 @@ void Roulette::construct(){
 	render = Render("inside.txt");
 
 	//List of all red chips
-	int redPos [] = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
+	red.push_back(1);
+	red.push_back(3);
+	red.push_back(7);
+	red.push_back(9);
+	red.push_back(12);
+	red.push_back(14);
+	red.push_back(16);
+	red.push_back(18);
+	red.push_back(19);
+	red.push_back(21);
+	red.push_back(23);
+	red.push_back(25);
+	red.push_back(27);
+	red.push_back(30);
+	red.push_back(32);
+	red.push_back(34);
+	red.push_back(36);
 
-	for(int i = 0; i < 18; i++){
+	for(int i = 0; i < red.size(); i++){
 		//Calculate the y position within the board
 		int rawY = 2;
-		if((redPos[i] % 3) == 0){
+		if((red[i] % 3) == 0){
 			rawY = 0;
-		}else if(((redPos[i] + 1) % 3) == 0){
+		}else if(((red[i] + 1) % 3) == 0){
 			rawY = 1;
 		}
-		int rawX = ((redPos[i] + rawY) / 3)-1;
+		int rawX = ((red[i] + rawY) / 3)-1;
 
 		//Calculate the pixel position
 		int y = (rawY*2)+2;
@@ -589,23 +605,5 @@ Coord Roulette::coordToScreenCoord(Coord c){
 
 //Check if number is red
 bool Roulette::onRed(int num){
-	return (
-		num == 1 ||
-		num == 3 ||
-		num == 5 ||
-		num == 7 ||
-		num == 9 ||
-		num == 12 ||
-		num == 14 ||
-		num == 16 ||
-		num == 18 ||
-		num == 19 ||
-		num == 21 ||
-		num == 23 ||
-		num == 25 ||
-		num == 27 ||
-		num == 30 ||
-		num == 32 ||
-		num == 34 ||
-		num == 36);
+	return (find(red.begin(), red.end(), num) != red.end());
 }
