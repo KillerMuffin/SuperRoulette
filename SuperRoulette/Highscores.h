@@ -12,7 +12,6 @@ using namespace std;
 class Highscores{
 public:
 	list<Highscore> highscores;
-	string file;
 
 	Highscores();
 	Highscores(string);
@@ -20,5 +19,5 @@ public:
 	vector<Highscore *> get(int);
 	void add(Highscore);
 
-	void save();
+	void save(string);
 };

@@ -39,7 +39,7 @@ void Highscores::add(Highscore h){
 	highscores.push_back(h);
 }
 
-void Highscores::save(){
+void Highscores::save(string file){
 	ofstream out(file);
 
 	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
