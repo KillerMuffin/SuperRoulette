@@ -18,5 +18,14 @@ vector<Highscore *> Highscores::get(int number){
 }
 
 void Highscores::add(Highscore h){
+	vector<Highscore *> h;
 
+	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
+		if((*it).won < h.won){
+			highscores.insert(it, h);
+			return;
+		}
+	}
+
+	highscores.push_back(h);
 }
