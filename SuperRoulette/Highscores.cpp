@@ -6,6 +6,7 @@ Highscores::Highscores(){}
 Highscores::Highscores(string file){
 	ifstream in(file);
 
+	//Read into list
 	string input;
 	while(getline(in, input)){
 		vector<string> h = Utils::split(input, ',');
@@ -16,6 +17,7 @@ Highscores::Highscores(string file){
 }
 
 vector<Highscore *> Highscores::get(int number){
+	//Get from list
 	vector<Highscore *> h;
 
 	int count = 0;
@@ -29,6 +31,7 @@ vector<Highscore *> Highscores::get(int number){
 }
 
 void Highscores::add(Highscore h){
+	//Insert into position
 	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
 		if((*it).won < h.won){
 			highscores.insert(it, h);
@@ -40,6 +43,7 @@ void Highscores::add(Highscore h){
 }
 
 void Highscores::save(string file){
+	//Write to file
 	ofstream out(file);
 
 	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
