@@ -454,7 +454,25 @@ void Roulette::mainMenu(){
 
 //Print the results of the bets
 void Roulette::printWinnings(){
-	cout << "Winning number: " << winNum << endl;
+	//Show winning pos
+	//Calculate the y position within the board
+	int rawY = 2;
+	if((winNum % 3) == 0){
+		rawY = 0;
+	}else if(((winNum + 1) % 3) == 0){
+		rawY = 1;
+	}
+	int rawX = ((winNum + rawY) / 3)-1;
+
+	//Calculate the pixel position
+	int y = (rawY*2)+2;
+	int x = (rawX*6)+5;
+
+	//Set pixel and render
+	render.set(x,y,Pixel('x',11));
+	render.render();
+
+	cout << endl << "Winning number: " << winNum << endl;
 
 	//Print wins/losses
 	if((money + winnings) > p.money){
