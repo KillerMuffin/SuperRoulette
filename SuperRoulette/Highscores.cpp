@@ -18,16 +18,17 @@ Highscores::Highscores(string file){
 vector<Highscore *> Highscores::get(int number){
 	vector<Highscore *> h;
 
-	for(list<Highscore>::iterator it = highscores.begin(), int count = 0; count < number && it != highscores.end(); it++, count++){
+	int count = 0;
+	for(list<Highscore>::iterator it = highscores.begin(); count < number && it != highscores.end(); it++){
 		h.push_back(&(*it));
+
+		count++;
 	}
 
 	return h;
 }
 
 void Highscores::add(Highscore h){
-	vector<Highscore *> h;
-
 	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
 		if((*it).won < h.won){
 			highscores.insert(it, h);
