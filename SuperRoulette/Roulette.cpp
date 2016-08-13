@@ -40,21 +40,15 @@ void Roulette::construct(){
 
 	for(int i = 0; i < red.size(); i++){
 		//Calculate the y position within the board
-		int rawY = 2;
-		if((red[i] % 3) == 0){
-			rawY = 0;
-		}else if(((red[i] + 1) % 3) == 0){
-			rawY = 1;
-		}
-		int rawX = ((red[i] + rawY) / 3)-1;
+		Coord c = numToCoord(red[i]);
 
 		//Calculate the pixel position
-		int y = (rawY*2)+2;
-		int x = (rawX*6)+5;
+		c.y = (c.y*2)+2;
+		c.x = (c.x*6)+5;
 
 		//Set those pixel to be red
-		for(int j = x-2; j < x+2; j++){
-			Pixel * p = render.get(j,y);
+		for(int j = c.x-2; j < c.x+2; j++){
+			Pixel * p = render.get(j,c.y);
 			p->color = 12;
 		}
 	}
@@ -472,20 +466,14 @@ void Roulette::mainMenu(){
 void Roulette::printWinnings(){
 	//Show winning pos
 	//Calculate the y position within the board
-	int rawY = 2;
-	if((winNum % 3) == 0){
-		rawY = 0;
-	}else if(((winNum + 1) % 3) == 0){
-		rawY = 1;
-	}
-	int rawX = ((winNum + rawY) / 3)-1;
+	Coord c = numToCoord(winNum);
 
 	//Calculate the pixel position
-	int y = (rawY*2)+2;
-	int x = (rawX*6)+5;
+	c.y = (c.y*2)+2;
+	c.x = (c.x*6)+5;
 
 	//Set pixel and render
-	render.set(x,y,Pixel('x',11));
+	render.set(c,Pixel('x',11));
 	render.render();
 
 	cout << endl << "Winning number: " << winNum << endl;
