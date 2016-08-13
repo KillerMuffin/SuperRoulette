@@ -29,3 +29,11 @@ void Highscores::add(Highscore h){
 
 	highscores.push_back(h);
 }
+
+void Highscores::save(){
+	ofstream out(file);
+
+	for(list<Highscore>::iterator it = highscores.begin(); it != highscores.end(); it++){
+		out << (*it).bet << "," << (*it).won << endl;
+	}
+}
