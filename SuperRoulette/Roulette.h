@@ -5,6 +5,7 @@
 #include "Utils.cpp"
 #include "Coord.h"
 #include "Render.h"
+#include "Highscores.h"
 
 #include <vector>
 #include <iostream>
@@ -28,10 +29,11 @@ private:
 	Render render;
 public:
 	Player p;
+	Highscores h;
 
 	//Constructors
 	Roulette();
-	Roulette(Player);
+	Roulette(Player, Highscores);
 
 	void play();
 	void newBet();

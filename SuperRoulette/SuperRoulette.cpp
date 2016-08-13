@@ -9,8 +9,9 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Player p("profile");
+	Highscores h("highscores.hs");
 
-	Roulette r = Roulette(p);
+	Roulette r = Roulette(p,h);
 	r.play();
 
 	return 0;

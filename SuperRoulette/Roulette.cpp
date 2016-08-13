@@ -5,10 +5,11 @@
 Roulette::Roulette(){
 	construct();
 }
-//New roulette game with loaded player
-Roulette::Roulette(Player p){
+//New roulette game with loaded player and highscores
+Roulette::Roulette(Player p, Highscores h){
 	construct();
 	this->p = p;
+	this->h = h;
 }
 
 //Constructor
@@ -439,10 +440,12 @@ void Roulette::mainMenu(){
 		case 4:
 			//Restart
 			p = Player();
+			h = Highscores();
 			break;
 		case 5:
 			//Save
 			p.save("profile");
+			h.save("highscores.hs");
 			break;
 		}
 
@@ -470,9 +473,12 @@ void Roulette::printWinnings(){
 			Bet b = winBets[i];
 			cout << " - " << b.name << " for $" << b.amount << " with " << b.odds << ":1 odds" << endl;
 
+			//Add to highscore
+			h.add(Highscore(b.name, b.amount * b.odds));
+
 			//Set highest win, etc
 			if(b.amount > p.highestWin){
-				p.highestWin = b.amount;
+				p.highestWin = b.amount * b.odds;
 			}
 		}
 	}
@@ -505,7 +511,14 @@ void Roulette::printHighscore(){
 
 	cout << "Total Bets: " << p.betCount << endl;
 	cout << "Total Won: " << p.wonCount << endl;
-	cout << "Highest Win: $" << p.highestWin << endl;
+	cout << "Highest Win: $" << p.highestWin << endl << endl;
+
+	cout << "Top 5 bets: " << endl;
+	
+	vector<Highscore *> top = h.get(5);
+	for(int i = 0; i < top.size(); i++){
+		cout << " - " << top[i]->bet << ": $" << top[i]->won << endl;
+	}
 
 	Utils::paul();
 }
