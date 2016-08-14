@@ -401,7 +401,7 @@ void Roulette::makeInsideBet(){
 	if((c.x % 2) == 0 && ((c.y+1) % 2) == 0){
 		int betAmount = getBetAmount();
 
-		if(numAtCoord(Coord(c.x-1, c.y)) == winNum || numAtCoord(Coord(c.x+1, c.y))){
+		if(numAtCoord(Coord(c.x-1, c.y)) == winNum || numAtCoord(Coord(c.x+1, c.y)) == winNum){
 			Bet b = Bet(betAmount, splitOdds, "Split Bet");
 			winBets.push_back(b);
 
@@ -415,7 +415,7 @@ void Roulette::makeInsideBet(){
 	if(((c.x+1) % 2) == 0 && (c.y % 2) == 0){
 		int betAmount = getBetAmount();
 
-		if(numAtCoord(Coord(c.x, c.y-1)) == winNum || numAtCoord(Coord(c.x, c.y+1))){
+		if(numAtCoord(Coord(c.x, c.y-1)) == winNum || numAtCoord(Coord(c.x, c.y+1)) == winNum){
 			Bet b = Bet(betAmount, splitOdds, "Split Bet");
 			winBets.push_back(b);
 
